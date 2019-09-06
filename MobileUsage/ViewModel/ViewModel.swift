@@ -14,7 +14,7 @@ class ViewModel {
     internal let session: URLSession
 
     init() {
-        self.session = URLSession()
+        self.session = URLSession.shared
         self.dataProxy = DataProxy(session: session)
     }
     
@@ -24,7 +24,7 @@ class ViewModel {
         self.dataProxy = DataProxy(session: self.session)
     }
     
-    func fetchData(completion:@escaping (_ numberOfRecord:Int?,_ err: FechError? ) -> Void) {
+    func fetchData(_ bInitial: Bool=true, completion:@escaping (_ numberOfRecord:Int?,_ err: FechError? ) -> Void) {
         self.dataProxy?.fetchData({ (data, error) in
             if error != nil || data == nil {
                 completion(0, error)

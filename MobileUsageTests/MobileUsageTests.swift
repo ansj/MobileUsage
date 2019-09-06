@@ -188,6 +188,25 @@ class MobileUsageTests: XCTestCase {
 
     }
 
+    func testViewModelFetchData() {
+
+        // Setup our objects
+        let viewModel = ViewModel()
+        let expectation = self.expectation(description: "Scaling")
+        // Perform the request and verify the result
+        viewModel.fetchData { (numberOfRow, err) in
+            XCTAssertEqual(numberOfRow, 2)
+            expectation.fulfill()
+            let item1 = viewModel.getItemAt(0)
+            let item2 = viewModel.getItemAt(1)
+            XCTAssertEqual(item1?.year, "2004")
+            XCTAssertEqual(item2?.year, "2005")
+        }
+        // Wait for the expectation to be fullfilled, or time out
+        // after 5 seconds. This is where the test runner will pause.
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
