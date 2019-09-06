@@ -159,7 +159,35 @@ class MobileUsageTests: XCTestCase {
         XCTAssertEqual(resultDecode?.result.records.count, 3)
     }
 
-    
+    func testMockViewModel() {
+        // Setup our objects
+        let session = URLSessionMock()
+        let viewModel = ViewModel(session: session)
+        
+        // Create data and tell the session to always return it
+        let data = jsonTest.data(using: .utf8)
+        let header = ["Content-Type":"application/json"]
+        let response = HTTPURLResponse(url: URL(string: "url")!, statusCode: 200, httpVersion: nil, headerFields: header)!
+        session.response = response
+        session.data = data
+        
+        // Create a URL (using the file path API to avoid optionals)
+        //let url = URL(fileURLWithPath: "url")
+        
+        // Perform the request and verify the result
+        var result: Int?
+        var err:FechError?
+        viewModel.fetchData { result = $0; err = $1}
+            
+        XCTAssertEqual(result, 2)
+        
+        let item1 = viewModel.getItemAt(0)
+        let item2 = viewModel.getItemAt(1)
+        XCTAssertEqual(item1?.year, "2004")
+        XCTAssertEqual(item2?.year, "2005")
+
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

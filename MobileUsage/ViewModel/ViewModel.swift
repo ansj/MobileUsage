@@ -9,11 +9,19 @@
 import Foundation
 
 class ViewModel {
-    private let dataProxy: DataProxy?
-    
+    internal var dataProxy: DataProxy?
+    private var listMobileUsage:[yearlyRecord] = [yearlyRecord]()
+    internal let session: URLSession
+
     init() {
-        let session = URLSession()
+        self.session = URLSession()
         self.dataProxy = DataProxy(session: session)
+    }
+    
+    // this for purpose of mockup 
+    init(session:URLSession){
+        self.session = session
+        self.dataProxy = DataProxy(session: self.session)
     }
     
     func fetchData(completion:@escaping (_ numberOfRecord:Int?,_ err: FechError? ) -> Void) {
@@ -24,7 +32,19 @@ class ViewModel {
             }
             
             let jsonResult = util.decode(data)
-            
+            if let result = jsonResult {
+                let yearly = util.getYearlyArray(result)
+                self.listMobileUsage.append(contentsOf: yearly)
+                completion(yearly.count, nil)
+            }
         })
+    }
+    
+    func getItemAt(_ indx:Int) -> yearlyRecord?
+    {
+        if indx < listMobileUsage.count && indx >= 0 {
+            return listMobileUsage[indx]
+        }
+        return nil
     }
 }
