@@ -32,3 +32,10 @@ public struct link: Codable {
     public let start: String
     public let next: String
 }
+
+public struct yearlyRecord {
+    public let year: String
+    public let volume_of_mobile_data: String
+    public let total_volume:Double
+}
+
