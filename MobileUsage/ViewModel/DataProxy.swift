@@ -12,6 +12,7 @@ enum FechError: Error {
     case error
     case responseError
     case wrongMimeType
+    case noNextURL
 }
 
 class DataProxy {
@@ -21,8 +22,7 @@ class DataProxy {
         self.session = session
     }
     
-    func fetchData(_ completion:@escaping (_ data:Data?, _ error: FechError?) ->Void ) {
-        let url = URL(string: "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=3")!
+    func fetchData(_ url:URL = URL(string:"url")!, completion:@escaping (_ data:Data?, _ error: FechError?) ->Void ) {
         
         let task = self.session.dataTask(with: url) { data, response, error in
             

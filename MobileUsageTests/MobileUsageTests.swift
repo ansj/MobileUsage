@@ -158,6 +158,37 @@ class MobileUsageTests: XCTestCase {
         XCTAssertNotNil(resultDecode, "Should not be nil")
         XCTAssertEqual(resultDecode?.result.records.count, 3)
     }
+    
+    // test mock data with local json data
+    // to get next link
+    func testMockGetNextURL() {
+        // Setup our objects
+        let session = URLSessionMock()
+        let manager = DataProxy(session: session)
+        
+        // Create data and tell the session to always return it
+        let data = jsonTest.data(using: .utf8)
+        let header = ["Content-Type":"application/json"]
+        let response = HTTPURLResponse(url: URL(string: "url")!, statusCode: 200, httpVersion: nil, headerFields: header)!
+        session.response = response
+        session.data = data
+        
+        // Create a URL (using the file path API to avoid optionals)
+        //let url = URL(fileURLWithPath: "url")
+        
+        // Perform the request and verify the result
+        var result: Data?
+        //var err:FechError?
+        manager.fetchData() { result = $0; _ = $1 }
+        let resultDecode = util.decode(result)
+        XCTAssertNotNil(resultDecode, "Should not be nil")
+        XCTAssertEqual(resultDecode?.result.records.count, 3)
+        
+        if let lastResult = resultDecode {
+            let nextURL = util.getNextUrl(lastResult)
+            XCTAssertEqual(nextURL?.absoluteString, "/api/action/datastore_search?offset=3&limit=3&resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f")
+        }
+    }
 
     func testMockViewModel() {
         // Setup our objects
@@ -188,6 +219,7 @@ class MobileUsageTests: XCTestCase {
 
     }
 
+    // test fetch using real network
     func testViewModelFetchData() {
 
         // Setup our objects
@@ -206,6 +238,27 @@ class MobileUsageTests: XCTestCase {
         // after 5 seconds. This is where the test runner will pause.
         waitForExpectations(timeout: 10, handler: nil)
     }
+    
+    // test fetch using real network
+    func testViewModelMultipleFetchData() {
+        
+        // Setup our objects
+        let viewModel = ViewModel()
+        let expectation = self.expectation(description: "Scaling")
+        // Perform the request and verify the result
+        viewModel.fetchData { (numberOfRow, err) in
+            XCTAssertEqual(numberOfRow, 2)
+            expectation.fulfill()
+            let item1 = viewModel.getItemAt(0)
+            let item2 = viewModel.getItemAt(1)
+            XCTAssertEqual(item1?.year, "2004")
+            XCTAssertEqual(item2?.year, "2005")
+        }
+        // Wait for the expectation to be fullfilled, or time out
+        // after 5 seconds. This is where the test runner will pause.
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

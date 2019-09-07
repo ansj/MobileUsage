@@ -17,6 +17,11 @@ class util{
         return decodeResult
     }
     
+    class func getNextUrl(_ jsonData:dataStore) -> URL?
+    {
+        return URL(string: jsonData.result._links.next)
+    }
+    
     class  func getYearlyArray(_ jsonData:dataStore) -> [yearlyRecord]{
 
         var retVal:[yearlyRecord] = [yearlyRecord]()
