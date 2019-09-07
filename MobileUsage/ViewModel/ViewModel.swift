@@ -14,7 +14,7 @@ class ViewModel {
     internal let session: URLSession
     private var url:URL?
     private var nextUrl:URL?
-    private let startURL = URL(string: "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=100")!
+    private let startURL = URL(string: "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=10")!
     
 
     init() {
@@ -70,11 +70,13 @@ class ViewModel {
         })
     }
     
-    func getItemAt(_ indx:Int) -> yearlyRecord?
+    func getItemAt(_ indx:Int) -> (data:yearlyRecord?, haveDecrease:Bool)
     {
         if indx < listMobileUsage.count && indx >= 0 {
-            return listMobileUsage[indx]
+            let data = listMobileUsage[indx]
+            let haveDecrease = util.containDecreaseQData(data.volume_of_mobile_data)
+            return (data, haveDecrease)
         }
-        return nil
+        return (nil, false)
     }
 }

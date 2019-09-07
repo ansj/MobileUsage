@@ -11,24 +11,39 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var lblHeader: UILabel!
     fileprivate var numberOfRow = 0
     fileprivate let viewModel = ViewModel()
+    var busyLoading=false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.lblHeader.text = "Mobile Data Usage\nPetabites"
         // Do any additional setup after loading the view.
-        viewModelHandling()
     }
     
-    private func viewModelHandling() {
-        viewModel.fetchData { (numberOfRow:Int?, err:FechError?) in
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModelHandling(true)
+    }
+    
+    private func viewModelHandling(_ isFirst:Bool) {
+        busyLoading=true
+        viewModel.fetchData(isFirst) { (numberOfRow:Int?, err:FechError?) in
             if err != nil {
                 return;
             }
             self.numberOfRow = numberOfRow!
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                
+                // make sure all screen is displayed full
+                if self.tableView.contentSize.height < self.tableView.frame.size.height {
+                    self.viewModelHandling(false)
+                }
             }
+            self.busyLoading=false
         }
     }
 }
@@ -42,12 +57,30 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellMobileDataID", for: indexPath)  as! CellMobileData
-        
+        cell.lblDown.isHidden = true
         let mobileData = self.viewModel.getItemAt(indexPath.row)
-        cell.lblYear.text = mobileData?.year
-        cell.lblData.text = "\(mobileData?.total_volume ?? 0)"
+        cell.lblYear.text = mobileData.data?.year
+        cell.lblData.text = "\(mobileData.data?.total_volume ?? 0)"
+        cell.lblDown.isHidden = !mobileData.haveDecrease
         return cell
     }
     
-    
+    // make sure to download rest of the content when
+    // table view is scolled
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset
+        let bounds = scrollView.bounds
+        let size = scrollView.contentSize
+        let inset = scrollView.contentInset
+        let y = offset.y + bounds.size.height - inset.bottom
+        let h = size.height
+        let reload_distance:CGFloat = 10.0
+        if y > (h + reload_distance) {
+            print("load more rows")
+            if busyLoading {
+                return
+            }
+            viewModelHandling(false)
+        }
+    }
 }

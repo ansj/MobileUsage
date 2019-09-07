@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ClJ-12-XOp">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="752"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellMobileDataID" id="pDo-EG-rLA" customClass="CellMobileData" customModule="MobileUsage" customModuleProvider="target">
@@ -39,22 +39,34 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi4-og-1s7">
-                                                    <rect key="frame" x="112" y="11.5" width="282" height="21"/>
+                                                    <rect key="frame" x="112" y="11.5" width="239" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⬇" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meN-yb-2Yt">
+                                                    <rect key="frame" x="359" y="6" width="41" height="31.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="41" id="eYS-HJ-wl0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Qi4-og-1s7" firstAttribute="centerY" secondItem="gcq-0x-49G" secondAttribute="centerY" id="ElY-ab-bEp"/>
-                                                <constraint firstItem="Qi4-og-1s7" firstAttribute="trailing" secondItem="gcq-0x-49G" secondAttribute="trailingMargin" id="Wdm-fE-zHv"/>
+                                                <constraint firstItem="meN-yb-2Yt" firstAttribute="centerY" secondItem="gcq-0x-49G" secondAttribute="centerY" id="N6A-GC-pGF"/>
+                                                <constraint firstItem="Qi4-og-1s7" firstAttribute="trailing" secondItem="gcq-0x-49G" secondAttribute="trailingMargin" constant="-43" id="Wdm-fE-zHv"/>
                                                 <constraint firstItem="a7q-lT-48j" firstAttribute="centerY" secondItem="gcq-0x-49G" secondAttribute="centerY" id="fY1-G3-lCZ"/>
                                                 <constraint firstItem="a7q-lT-48j" firstAttribute="leading" secondItem="gcq-0x-49G" secondAttribute="leadingMargin" id="oM4-y8-W7D"/>
                                                 <constraint firstItem="Qi4-og-1s7" firstAttribute="leading" secondItem="a7q-lT-48j" secondAttribute="trailing" constant="30" id="pwm-KN-chj"/>
+                                                <constraint firstAttribute="trailing" secondItem="meN-yb-2Yt" secondAttribute="trailing" constant="14" id="qNh-VR-IQ1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="lblData" destination="Qi4-og-1s7" id="DTt-2O-Ck2"/>
+                                            <outlet property="lblDown" destination="meN-yb-2Yt" id="ayP-ho-coh"/>
                                             <outlet property="lblYear" destination="a7q-lT-48j" id="Vnp-Ji-hDw"/>
                                         </connections>
                                     </tableViewCell>
@@ -64,17 +76,26 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="dxa-nW-ZSI"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Data Usage" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAI-Yf-TRI">
+                                <rect key="frame" x="134.5" y="90" width="145" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ClJ-12-XOp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7ej-Gl-R0o"/>
-                            <constraint firstItem="ClJ-12-XOp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HVd-Eb-lYl"/>
+                            <constraint firstItem="lAI-Yf-TRI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="46" id="HCL-G8-Heq"/>
+                            <constraint firstItem="ClJ-12-XOp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="HVd-Eb-lYl"/>
                             <constraint firstItem="ClJ-12-XOp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Mw0-IO-0BV"/>
+                            <constraint firstItem="lAI-Yf-TRI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Tqe-SA-swx"/>
                             <constraint firstAttribute="bottom" secondItem="ClJ-12-XOp" secondAttribute="bottom" id="W3g-PQ-0jX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="lblHeader" destination="lAI-Yf-TRI" id="NZz-78-qoy"/>
                         <outlet property="tableView" destination="ClJ-12-XOp" id="mzz-xo-dyp"/>
                     </connections>
                 </viewController>

@@ -11,6 +11,8 @@ import UIKit
 class CellMobileData: UITableViewCell {
     @IBOutlet weak var lblYear: UILabel!
     @IBOutlet weak var lblData: UILabel!
+    @IBOutlet weak var lblDown: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

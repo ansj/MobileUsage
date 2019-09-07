@@ -45,7 +45,7 @@ class util{
                 if arrStr.count > 0 {
                     let sYear = String(arrStr[0])
                     let dataUsage = Double(record.volume_of_mobile_data)!
-                    let rec = yearlyRecord(year:sYear, volume_of_mobile_data: "0", total_volume:dataUsage)
+                    let rec = yearlyRecord(year:sYear, volume_of_mobile_data: record.volume_of_mobile_data, total_volume:dataUsage)
                     retVal.append(rec)
                 }
             }
@@ -66,25 +66,43 @@ class util{
             }
             
             var initialYear = yearArray[0].year
+            var initialQData = yearArray[0].volume_of_mobile_data
             var dataUsage = 0.0
             for record in yearArray {
                 let sYear = record.year
                 if sYear != initialYear {
                     //dataUsage = record.total_volume
-                    let rec = yearlyRecord(year:initialYear, volume_of_mobile_data: "0", total_volume:dataUsage)
+                    let rec = yearlyRecord(year:initialYear, volume_of_mobile_data: initialQData, total_volume:dataUsage)
                     retVal.append(rec)
                     initialYear = sYear
+                    initialQData = record.volume_of_mobile_data
                     dataUsage = record.total_volume
                 }
                 else {
                     dataUsage = dataUsage + record.total_volume
+                    initialQData = initialQData + "," + record.volume_of_mobile_data
                 }
             }
-            let rec = yearlyRecord(year:initialYear, volume_of_mobile_data: "0", total_volume:dataUsage)
+            let rec = yearlyRecord(year:initialYear, volume_of_mobile_data: initialQData, total_volume:dataUsage)
             retVal.append(rec)
         }while false
         
         return retVal
     }
-
+    
+    class func containDecreaseQData(_ inData:String) -> Bool {
+        let arr = inData.split(separator: ",")
+        if arr.count == 1 {
+            return false
+        }
+        
+        for n in 0...(arr.count-2)  {
+            let q1 = Double(arr[n])!
+            let q2 = Double(arr[n + 1])!
+            if q2 < q1 {
+                return true
+            }
+        }
+        return false
+    }
 }
