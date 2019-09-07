@@ -70,7 +70,7 @@ class util{
             for record in yearArray {
                 let sYear = record.year
                 if sYear != initialYear {
-                    dataUsage = Double(record.volume_of_mobile_data)!
+                    //dataUsage = record.total_volume
                     let rec = yearlyRecord(year:initialYear, volume_of_mobile_data: "0", total_volume:dataUsage)
                     retVal.append(rec)
                     initialYear = sYear

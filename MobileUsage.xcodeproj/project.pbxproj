@@ -24,6 +24,7 @@
 		A112031F2322771B00B63A00 /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112031D2322771B00B63A00 /* SessionMock.swift */; };
 		A11203212322773100B63A00 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203202322773000B63A00 /* ViewModel.swift */; };
 		A11203222322773100B63A00 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203202322773000B63A00 /* ViewModel.swift */; };
+		A11203242323CC6900B63A00 /* CellMobileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203232323CC6900B63A00 /* CellMobileData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		A112031A2322770500B63A00 /* DataProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProxy.swift; sourceTree = "<group>"; };
 		A112031D2322771B00B63A00 /* SessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		A11203202322773000B63A00 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		A11203232323CC6900B63A00 /* CellMobileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMobileData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				A11203122321565D00B63A00 /* Model */,
 				A11202E42321561F00B63A00 /* AppDelegate.swift */,
 				A11202E62321561F00B63A00 /* ViewController.swift */,
+				A11203232323CC6900B63A00 /* CellMobileData.swift */,
 				A11202E82321561F00B63A00 /* Main.storyboard */,
 				A11202EB2321562000B63A00 /* Assets.xcassets */,
 				A11202ED2321562000B63A00 /* LaunchScreen.storyboard */,
@@ -297,6 +300,7 @@
 				A112031E2322771B00B63A00 /* SessionMock.swift in Sources */,
 				A11202E72321561F00B63A00 /* ViewController.swift in Sources */,
 				A11202E52321561F00B63A00 /* AppDelegate.swift in Sources */,
+				A11203242323CC6900B63A00 /* CellMobileData.swift in Sources */,
 				A1120318232160E400B63A00 /* Util.swift in Sources */,
 				A11203212322773100B63A00 /* ViewModel.swift in Sources */,
 			);
