@@ -248,15 +248,22 @@ class MobileUsageTests: XCTestCase {
         // Perform the request and verify the result
         viewModel.fetchData { (numberOfRow, err) in
             XCTAssertEqual(numberOfRow, 2)
-            expectation.fulfill()
             let item1 = viewModel.getItemAt(0)
             let item2 = viewModel.getItemAt(1)
             XCTAssertEqual(item1?.year, "2004")
             XCTAssertEqual(item2?.year, "2005")
+            
+            DispatchQueue.main.async {
+                viewModel.fetchData(false, completion: { (numOfRow, err) in
+                    print(numOfRow)
+                    expectation.fulfill()
+                    
+                })
+            }
         }
         // Wait for the expectation to be fullfilled, or time out
         // after 5 seconds. This is where the test runner will pause.
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 1000, handler: nil)
     }
 
 

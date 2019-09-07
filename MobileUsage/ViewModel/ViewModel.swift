@@ -38,6 +38,7 @@ class ViewModel {
                 completion(0, FechError.noNextURL)
                 return
             }
+            self.url = self.nextUrl
         }
         
         self.dataProxy?.fetchData( self.url!,  completion: { (data, error) in
@@ -58,7 +59,9 @@ class ViewModel {
                     self.nextUrl = nil
                 }
                 
-                completion(yearly.count, nil)
+                //print(self.listMobileUsage)
+                
+                completion(self.listMobileUsage.count, nil)
             }
         })
     }
