@@ -14,7 +14,7 @@ class ViewModel {
     internal let session: URLSession
     private var url:URL?
     private var nextUrl:URL?
-    private let startURL = URL(string: "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=3")!
+    private let startURL = URL(string: "https://data.gov.sg/api/action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f&limit=100")!
     
 
     init() {
@@ -60,8 +60,12 @@ class ViewModel {
                 }
                 
                 //print(self.listMobileUsage)
+                self.listMobileUsage = util.getGroupYearlyArray(self.listMobileUsage)
                 
                 completion(self.listMobileUsage.count, nil)
+            }
+            else {
+                completion(0, FechError.noData)
             }
         })
     }

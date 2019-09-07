@@ -13,6 +13,7 @@ enum FechError: Error {
     case responseError
     case wrongMimeType
     case noNextURL
+    case noData
 }
 
 class DataProxy {
