@@ -29,6 +29,36 @@ class MobileUsageUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+       
+    }
+    
+    func  testDisplayAndScroll() {
+        
+        let tablesQuery = XCUIApplication().tables
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["2006"]/*[[".cells.staticTexts[\"2006\"]",".staticTexts[\"2006\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeUp()
+        //waitForExpectations(timeout: 5, handler: nil)
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["2010"]/*[[".cells.staticTexts[\"2009\"]",".staticTexts[\"2009\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeUp()
+        
+        let element = tablesQuery.staticTexts["2011"]
+        self.waitForElementToAppear(element: element)
+        element.tap()
+        
+        
+    }
+    
+    func waitForElementToAppear(element: XCUIElement, timeout: TimeInterval = 10,  file: String = #file, line: UInt = #line) {
+        let existsPredicate = NSPredicate(format: "exists == true")
+        
+        expectation(for: existsPredicate,
+                    evaluatedWith: element, handler: nil)
+        
+        waitForExpectations(timeout: timeout) { (error) -> Void in
+            if (error != nil) {
+                let message = "Failed to find \(element) after \(timeout) seconds."
+                self.recordFailure(withDescription: message, inFile: file, atLine: Int(line), expected: true)
+            }
+        }
     }
 
 }

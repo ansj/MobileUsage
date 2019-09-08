@@ -24,7 +24,7 @@ class util{
     
     class func getNextUrl(_ jsonData:dataStore) -> URL?
     {
-        return URL(string: "https://data.gov.sg/\(jsonData.result._links.next)")
+        return URL(string: "https://data.gov.sg\(jsonData.result._links.next)")
     }
     
     class  func getYearlyArray(_ jsonData:dataStore) -> [yearlyRecord]{
@@ -66,7 +66,7 @@ class util{
             }
             
             var initialYear = yearArray[0].year
-            var initialQData = yearArray[0].volume_of_mobile_data
+            var initialQData = ""
             var dataUsage = 0.0
             for record in yearArray {
                 let sYear = record.year

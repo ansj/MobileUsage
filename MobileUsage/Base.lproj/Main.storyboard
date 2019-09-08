@@ -82,19 +82,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="D1F-u0-m4F">
+                                <rect key="frame" x="306" y="90.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ClJ-12-XOp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7ej-Gl-R0o"/>
+                            <constraint firstItem="D1F-u0-m4F" firstAttribute="leading" secondItem="lAI-Yf-TRI" secondAttribute="trailing" constant="26.5" id="8NN-SZ-O9v"/>
                             <constraint firstItem="lAI-Yf-TRI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="46" id="HCL-G8-Heq"/>
                             <constraint firstItem="ClJ-12-XOp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="HVd-Eb-lYl"/>
                             <constraint firstItem="ClJ-12-XOp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Mw0-IO-0BV"/>
                             <constraint firstItem="lAI-Yf-TRI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Tqe-SA-swx"/>
                             <constraint firstAttribute="bottom" secondItem="ClJ-12-XOp" secondAttribute="bottom" id="W3g-PQ-0jX"/>
+                            <constraint firstItem="D1F-u0-m4F" firstAttribute="centerY" secondItem="lAI-Yf-TRI" secondAttribute="centerY" id="dc9-S9-DB1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activity" destination="D1F-u0-m4F" id="dyr-oa-szY"/>
                         <outlet property="lblHeader" destination="lAI-Yf-TRI" id="NZz-78-qoy"/>
                         <outlet property="tableView" destination="ClJ-12-XOp" id="mzz-xo-dyp"/>
                     </connections>

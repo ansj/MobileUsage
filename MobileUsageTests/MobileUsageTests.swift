@@ -67,6 +67,7 @@ class MobileUsageTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    // test util class to decode
     func testDecode() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -75,6 +76,25 @@ class MobileUsageTests: XCTestCase {
         let resultDecode = util.decode(data)
          XCTAssertNotNil(resultDecode, "Should not be nil")
          XCTAssertEqual(resultDecode?.result.records.count, 3)
+        
+        // test decode nil value
+        let resultD = util.decode(nil)
+        XCTAssertNil(resultD)
+
+        let dataTest = Data(bytes: [0, 1, 0, 1])
+        let resultD2 = util.decode(dataTest)
+        XCTAssertNil(resultD2)
+    }
+    
+    // test util class function to test if during quarter have decline value
+    func testDecline() {
+        let strQ = "0.1,0.2,0.12"
+        let strQ2 = "0.1,0.2,0.3"
+        var isHaveDecline = util.containDecreaseQData(strQ)
+        XCTAssertEqual(isHaveDecline, true)
+         isHaveDecline = util.containDecreaseQData(strQ2)
+        XCTAssertEqual(isHaveDecline, false)
+
     }
     
     func testArrayConversion() {
@@ -85,13 +105,13 @@ class MobileUsageTests: XCTestCase {
         let resultDecode = util.decode(data)
         if let result = resultDecode {
             let yearlyArr = util.getYearlyArray(result)
-            XCTAssertEqual(yearlyArr.count, 2)
+            XCTAssertEqual(yearlyArr.count, 3)
         }
         XCTAssertNotNil(resultDecode, "Should not be nil")
     }
 
-    
-    func testMockSuccessfulResponse() {
+    // test if the server return status code 400 (bad request from server)
+    func testMockHandlingResponceResponse() {
         // Setup our objects
         let session = URLSessionMock()
         let manager = DataProxy(session: session)
@@ -102,9 +122,6 @@ class MobileUsageTests: XCTestCase {
         let response = HTTPURLResponse(url: URL(string: "url")!, statusCode: 400, httpVersion: nil, headerFields: header)!
         session.response = response
         session.data = data
-        
-        // Create a URL (using the file path API to avoid optionals)
-        //let url = URL(fileURLWithPath: "url")
         
         // Perform the request and verify the result
         var result: FechError?
@@ -186,10 +203,11 @@ class MobileUsageTests: XCTestCase {
         
         if let lastResult = resultDecode {
             let nextURL = util.getNextUrl(lastResult)
-            XCTAssertEqual(nextURL?.absoluteString, "/api/action/datastore_search?offset=3&limit=3&resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f")
+            XCTAssertEqual(nextURL?.absoluteString, "https://data.gov.sg/api/action/datastore_search?offset=3&limit=3&resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f")
         }
     }
 
+    // test viewmodel to handling local data
     func testMockViewModel() {
         // Setup our objects
         let session = URLSessionMock()
@@ -214,8 +232,8 @@ class MobileUsageTests: XCTestCase {
         
         let item1 = viewModel.getItemAt(0)
         let item2 = viewModel.getItemAt(1)
-        XCTAssertEqual(item1?.year, "2004")
-        XCTAssertEqual(item2?.year, "2005")
+        XCTAssertEqual(item1.data?.year, "2004")
+        XCTAssertEqual(item2.data?.year, "2005")
 
     }
 
@@ -227,12 +245,12 @@ class MobileUsageTests: XCTestCase {
         let expectation = self.expectation(description: "Scaling")
         // Perform the request and verify the result
         viewModel.fetchData { (numberOfRow, err) in
-            XCTAssertEqual(numberOfRow, 2)
+            XCTAssertEqual(numberOfRow, 3)
             expectation.fulfill()
             let item1 = viewModel.getItemAt(0)
             let item2 = viewModel.getItemAt(1)
-            XCTAssertEqual(item1?.year, "2004")
-            XCTAssertEqual(item2?.year, "2005")
+            XCTAssertEqual(item1.data?.year, "2004")
+            XCTAssertEqual(item2.data?.year, "2005")
         }
         // Wait for the expectation to be fullfilled, or time out
         // after 5 seconds. This is where the test runner will pause.
@@ -247,15 +265,15 @@ class MobileUsageTests: XCTestCase {
         let expectation = self.expectation(description: "Scaling")
         // Perform the request and verify the result
         viewModel.fetchData { (numberOfRow, err) in
-            XCTAssertEqual(numberOfRow, 2)
+            XCTAssertEqual(numberOfRow, 3)
             let item1 = viewModel.getItemAt(0)
             let item2 = viewModel.getItemAt(1)
-            XCTAssertEqual(item1?.year, "2004")
-            XCTAssertEqual(item2?.year, "2005")
+            XCTAssertEqual(item1.data?.year, "2004")
+            XCTAssertEqual(item2.data?.year, "2005")
             
             DispatchQueue.main.async {
                 viewModel.fetchData(false, completion: { (numOfRow, err) in
-                    print(numOfRow)
+                    print(numOfRow ?? -1)
                     expectation.fulfill()
                     
                 })

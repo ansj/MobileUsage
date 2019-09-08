@@ -45,10 +45,3 @@ class URLSessionMock: URLSession {
         }
     }
 }
-
-//class ViewModelMock:ViewModel {
-//    init(session:URLSession) {
-//        //self.session = URLSessionMock()
-//        self.dataProxy = DataProxy(session: session)
-//    }
-//}

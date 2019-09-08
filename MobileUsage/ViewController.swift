@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblHeader: UILabel!
+    @IBOutlet weak var activity: UIActivityIndicatorView!
+
     fileprivate var numberOfRow = 0
     fileprivate let viewModel = ViewModel()
     var busyLoading=false
@@ -25,13 +27,17 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModelHandling(true)
+        viewModelFetchData(true)
     }
     
-    private func viewModelHandling(_ isFirst:Bool) {
+    private func viewModelFetchData(_ isFirst:Bool) {
         busyLoading=true
+        self.activity.startAnimating()
         viewModel.fetchData(isFirst) { (numberOfRow:Int?, err:FechError?) in
             if err != nil {
+                DispatchQueue.main.async {
+                    self.activity.stopAnimating()
+                }
                 return;
             }
             self.numberOfRow = numberOfRow!
@@ -40,11 +46,19 @@ class ViewController: UIViewController {
                 
                 // make sure all screen is displayed full
                 if self.tableView.contentSize.height < self.tableView.frame.size.height {
-                    self.viewModelHandling(false)
+                    self.viewModelFetchData(false)
                 }
+                self.activity.stopAnimating()
             }
             self.busyLoading=false
         }
+    }
+    
+    private func displayInfo(info:String) {
+        let alert = UIAlertController.init(title: "Info", message: info, preferredStyle: .alert)
+        let ok = UIAlertAction.init(title: "OK", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(alert, animated: true)
     }
 }
 
@@ -64,7 +78,14 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource
         cell.lblDown.isHidden = !mobileData.haveDecrease
         return cell
     }
-    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let mobileData = self.viewModel.getItemAt(indexPath.row)
+        if mobileData.haveDecrease {
+            self.displayInfo(info: "Declined Quarter Data")
+        }
+    }
+
     // make sure to download rest of the content when
     // table view is scolled
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -76,11 +97,11 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource
         let h = size.height
         let reload_distance:CGFloat = 10.0
         if y > (h + reload_distance) {
-            print("load more rows")
+            //print("load more rows")
             if busyLoading {
                 return
             }
-            viewModelHandling(false)
+            viewModelFetchData(false)
         }
     }
 }
