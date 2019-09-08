@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     fileprivate var numberOfRow = 0
     fileprivate let viewModel = ViewModel()
     var busyLoading=false
+    var errorHappen=false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +33,24 @@ class ViewController: UIViewController {
     
     private func viewModelFetchData(_ isFirst:Bool) {
         busyLoading=true
+        self.errorHappen = false
         self.activity.startAnimating()
         viewModel.fetchData(isFirst) { (numberOfRow:Int?, err:FechError?) in
-            if err != nil {
+            if err != nil  {
+                
                 DispatchQueue.main.async {
                     self.activity.stopAnimating()
+                    
+                    if err == FechError.noData {
+                        return
+                    }
+                    self.errorHappen = true
+                    self.numberOfRow = 1
+                    self.tableView.reloadData()
                 }
                 return;
             }
+            
             self.numberOfRow = numberOfRow!
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -70,6 +81,10 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if self.errorHappen {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CellErrorID", for: indexPath)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellMobileDataID", for: indexPath)  as! CellMobileData
         cell.lblDown.isHidden = true
         let mobileData = self.viewModel.getItemAt(indexPath.row)

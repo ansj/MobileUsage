@@ -25,6 +25,7 @@
 		A11203212322773100B63A00 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203202322773000B63A00 /* ViewModel.swift */; };
 		A11203222322773100B63A00 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203202322773000B63A00 /* ViewModel.swift */; };
 		A11203242323CC6900B63A00 /* CellMobileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203232323CC6900B63A00 /* CellMobileData.swift */; };
+		A11203262324A90E00B63A00 /* ViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203252324A90E00B63A00 /* ViewControllerTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		A112031D2322771B00B63A00 /* SessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		A11203202322773000B63A00 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A11203232323CC6900B63A00 /* CellMobileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMobileData.swift; sourceTree = "<group>"; };
+		A11203252324A90E00B63A00 /* ViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			children = (
 				A11202F92321562000B63A00 /* MobileUsageTests.swift */,
 				A11202FB2321562000B63A00 /* Info.plist */,
+				A11203252324A90E00B63A00 /* ViewControllerTest.swift */,
 			);
 			path = MobileUsageTests;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			files = (
 				A11202FA2321562000B63A00 /* MobileUsageTests.swift in Sources */,
 				A112031F2322771B00B63A00 /* SessionMock.swift in Sources */,
+				A11203262324A90E00B63A00 /* ViewControllerTest.swift in Sources */,
 				A1120319232160E400B63A00 /* Util.swift in Sources */,
 				A112031C2322770500B63A00 /* DataProxy.swift in Sources */,
 				A11203222322773100B63A00 /* ViewModel.swift in Sources */,

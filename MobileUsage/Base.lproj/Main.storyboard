@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MobileUsage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainVCID" id="BYZ-38-t0r" customClass="ViewController" customModule="MobileUsage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,6 +69,27 @@
                                             <outlet property="lblDown" destination="meN-yb-2Yt" id="ayP-ho-coh"/>
                                             <outlet property="lblYear" destination="a7q-lT-48j" id="Vnp-Ji-hDw"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellErrorID" rowHeight="101" id="OzG-a9-0Th">
+                                        <rect key="frame" x="0.0" y="72" width="414" height="101"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OzG-a9-0Th" id="87m-UJ-XdV">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error. Please make sure that the phone is connected to internet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sml-zZ-SFi">
+                                                    <rect key="frame" x="36" y="32.5" width="342" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sml-zZ-SFi" firstAttribute="centerY" secondItem="87m-UJ-XdV" secondAttribute="centerY" id="ZDo-YO-BBd"/>
+                                                <constraint firstItem="sml-zZ-SFi" firstAttribute="trailing" secondItem="87m-UJ-XdV" secondAttribute="trailingMargin" constant="-16" id="jWD-uu-Pbp"/>
+                                                <constraint firstItem="sml-zZ-SFi" firstAttribute="leading" secondItem="87m-UJ-XdV" secondAttribute="leadingMargin" constant="16" id="r50-IN-Mg2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
