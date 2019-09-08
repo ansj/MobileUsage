@@ -283,6 +283,22 @@ class MobileUsageTests: XCTestCase {
         // after 5 seconds. This is where the test runner will pause.
         waitForExpectations(timeout: 1000, handler: nil)
     }
+    
+    // test the persist data to shared user default
+    func testDataPersistent() {
+        
+        var theList = [yearlyRecord]()
+        
+        let item1 = yearlyRecord(year:"2018", volume_of_mobile_data: "0.1,0.2,0.3", total_volume:0.5)
+        let item2 = yearlyRecord(year:"2019", volume_of_mobile_data: "0.1,0.2,0.3", total_volume:0.5)
+        theList.append(item1)
+        theList.append(item2)
+        
+        Persist.saveList(theList)
+        let theList2 = Persist.getList()
+        
+        XCTAssertEqual(theList2?.count, 2)
+    }
 
 
     func testPerformanceExample() {

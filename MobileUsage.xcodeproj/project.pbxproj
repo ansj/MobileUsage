@@ -26,6 +26,10 @@
 		A11203222322773100B63A00 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203202322773000B63A00 /* ViewModel.swift */; };
 		A11203242323CC6900B63A00 /* CellMobileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203232323CC6900B63A00 /* CellMobileData.swift */; };
 		A11203262324A90E00B63A00 /* ViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11203252324A90E00B63A00 /* ViewControllerTest.swift */; };
+		A112032B2324F06300B63A00 /* PersistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112032A2324F06300B63A00 /* PersistModel.swift */; };
+		A112032C2324F06300B63A00 /* PersistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112032A2324F06300B63A00 /* PersistModel.swift */; };
+		A112032E2324F1D200B63A00 /* Persist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112032D2324F1D200B63A00 /* Persist.swift */; };
+		A112032F2324F1D200B63A00 /* Persist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112032D2324F1D200B63A00 /* Persist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +70,8 @@
 		A11203202322773000B63A00 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A11203232323CC6900B63A00 /* CellMobileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMobileData.swift; sourceTree = "<group>"; };
 		A11203252324A90E00B63A00 /* ViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTest.swift; sourceTree = "<group>"; };
+		A112032A2324F06300B63A00 /* PersistModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistModel.swift; sourceTree = "<group>"; };
+		A112032D2324F1D200B63A00 /* Persist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,7 @@
 		A11202E32321561F00B63A00 /* MobileUsage */ = {
 			isa = PBXGroup;
 			children = (
+				A11203292324F04300B63A00 /* Persist */,
 				A11203132321567000B63A00 /* ViewModel */,
 				A11203122321565D00B63A00 /* Model */,
 				A11202E42321561F00B63A00 /* AppDelegate.swift */,
@@ -165,6 +172,15 @@
 				A112031D2322771B00B63A00 /* SessionMock.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A11203292324F04300B63A00 /* Persist */ = {
+			isa = PBXGroup;
+			children = (
+				A112032A2324F06300B63A00 /* PersistModel.swift */,
+				A112032D2324F1D200B63A00 /* Persist.swift */,
+			);
+			path = Persist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,10 +314,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A112032E2324F1D200B63A00 /* Persist.swift in Sources */,
 				A112031523215B9600B63A00 /* Model.swift in Sources */,
 				A112031B2322770500B63A00 /* DataProxy.swift in Sources */,
 				A112031E2322771B00B63A00 /* SessionMock.swift in Sources */,
 				A11202E72321561F00B63A00 /* ViewController.swift in Sources */,
+				A112032B2324F06300B63A00 /* PersistModel.swift in Sources */,
 				A11202E52321561F00B63A00 /* AppDelegate.swift in Sources */,
 				A11203242323CC6900B63A00 /* CellMobileData.swift in Sources */,
 				A1120318232160E400B63A00 /* Util.swift in Sources */,
@@ -313,10 +331,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A112032C2324F06300B63A00 /* PersistModel.swift in Sources */,
 				A11202FA2321562000B63A00 /* MobileUsageTests.swift in Sources */,
 				A112031F2322771B00B63A00 /* SessionMock.swift in Sources */,
 				A11203262324A90E00B63A00 /* ViewControllerTest.swift in Sources */,
 				A1120319232160E400B63A00 /* Util.swift in Sources */,
+				A112032F2324F1D200B63A00 /* Persist.swift in Sources */,
 				A112031C2322770500B63A00 /* DataProxy.swift in Sources */,
 				A11203222322773100B63A00 /* ViewModel.swift in Sources */,
 				A112031623215B9600B63A00 /* Model.swift in Sources */,

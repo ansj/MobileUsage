@@ -30,6 +30,19 @@ class ViewModel {
     
     func fetchData(_ bInitial: Bool=true, completion:@escaping (_ numberOfRecord:Int?,_ err: FechError? ) -> Void) {
         
+        if !Reachability.isConnectedToNetwork()  {
+            if self.listMobileUsage.count > 0 {
+                return
+            }
+            getData()
+            if self.listMobileUsage.count == 0 {
+                completion(self.listMobileUsage.count, FechError.error)
+                return
+            }
+            completion(self.listMobileUsage.count, nil)
+            return
+        }
+        
         if bInitial {
             self.url = startURL
         }
@@ -65,6 +78,7 @@ class ViewModel {
                 completion(self.listMobileUsage.count, nil)
             }
             else {
+                self.saveData()
                 completion(0, FechError.noData)
             }
         })
@@ -78,5 +92,18 @@ class ViewModel {
             return (data, haveDecrease)
         }
         return (nil, false)
+    }
+    
+    private func saveData() {
+        if self.listMobileUsage.count > 0 {
+            Persist.saveList(self.listMobileUsage)
+        }
+    }
+    
+    private func getData() {
+        let savedData = Persist.getList()
+        if let theList = savedData {
+            self.listMobileUsage = theList
+        }
     }
 }
